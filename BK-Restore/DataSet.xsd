@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection ConnectionStringObject="Data Source=MINHTRAN;Initial Catalog=tempdb;Integrated Security=True" IsAppSettingsProperty="false" Modifier="Assembly" Name="minhtran.tempdb.dbo" ParameterPrefix="@" Provider="System.Data.SqlClient" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="databasesTableAdapter" GeneratorDataComponentClassName="databasesTableAdapter" Name="databases" UserDataComponentName="databasesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="minhtran.tempdb.dbo" DbObjectName="tempdb.sys.databases" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT      name, database_id
+FROM        sys.databases
+WHERE      (database_id &gt;= 5) AND (NOT (name LIKE N'ReportServer%'))
+ORDER BY NAME</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="name" DataSetColumn="name" />
+              <Mapping SourceColumn="database_id" DataSetColumn="database_id" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="backup_devicesTableAdapter" GeneratorDataComponentClassName="backup_devicesTableAdapter" Name="backup_devices" UserDataComponentName="backup_devicesTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="minhtran.tempdb.dbo" DbObjectName="tempdb.sys.backup_devices" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        name
+FROM            sys.backup_devices</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="name" DataSetColumn="name" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="SP_STT_BACKUPTableAdapter" GeneratorDataComponentClassName="SP_STT_BACKUPTableAdapter" Name="SP_STT_BACKUP" UserDataComponentName="SP_STT_BACKUPTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="minhtran.tempdb.dbo" DbObjectName="msdb.dbo.backupset" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT        position, name, backup_start_date, user_name, backup_set_id
+FROM            msdb.dbo.backupset
+WHERE        (database_name = @dbName) AND (type = 'D') AND (backup_set_id &gt;=
+                             (SELECT        MAX(backupset_2.backup_set_id) AS Expr1
+                               FROM            msdb.dbo.backupset AS backupset_2 INNER JOIN
+                                                             (SELECT        MAX(media_set_id) AS max_media_set_id, MIN(position) AS min_position
+                                                               FROM            msdb.dbo.backupset AS backupset_1
+                                                               WHERE        (database_name = @dbName) AND (type = 'D')) AS backupsetfilter ON backupset_2.media_set_id = backupsetfilter.max_media_set_id AND backupset_2.position = backupsetfilter.min_position))
+ORDER BY position DESC</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="dbName" ColumnName="database_name" DataSourceName="msdb.dbo.backupset" DataTypeServer="nvarchar(128)" DbType="String" Direction="Input" ParameterName="@dbName" Precision="0" Scale="0" Size="128" SourceColumn="database_name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="position" DataSetColumn="position" />
+              <Mapping SourceColumn="name" DataSetColumn="name" />
+              <Mapping SourceColumn="backup_start_date" DataSetColumn="backup_start_date" />
+              <Mapping SourceColumn="user_name" DataSetColumn="user_name" />
+              <Mapping SourceColumn="backup_set_id" DataSetColumn="backup_set_id" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="keysTableAdapter" GeneratorDataComponentClassName="keysTableAdapter" Name="keys" UserDataComponentName="keysTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="minhtran.tempdb.dbo" DbObjectName="msdb.dbo.restorehistory" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT restore_history_id
+FROM msdb.dbo.restorehistory
+WHERE backup_set_id = @backupSetId</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="false" AutogeneratedName="backupSetId" ColumnName="backup_set_id" DataSourceName="msdb.dbo.restorehistory" DataTypeServer="int" DbType="Int32" Direction="Input" ParameterName="@backupSetId" Precision="0" Scale="0" Size="4" SourceColumn="backup_set_id" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="restore_history_id" DataSetColumn="restore_history_id" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="backupsetTableAdapter" GeneratorDataComponentClassName="backupsetTableAdapter" Name="backupset" UserDataComponentName="backupsetTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="minhtran.tempdb.dbo" DbObjectName="msdb.dbo.backupset" DbObjectType="Table" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="true">
+                    <CommandText>SELECT backup_set_id, media_set_id FROM msdb.dbo.backupset WHERE database_name=@dbName</CommandText>
+                    <Parameters>
+                      <Parameter AllowDbNull="true" AutogeneratedName="dbName" ColumnName="database_name" DataSourceName="msdb.dbo.backupset" DataTypeServer="nvarchar(128)" DbType="String" Direction="Input" ParameterName="@dbName" Precision="0" Scale="0" Size="128" SourceColumn="database_name" SourceColumnNullMapping="false" SourceVersion="Current" />
+                    </Parameters>
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="backup_set_id" DataSetColumn="backup_set_id" />
+              <Mapping SourceColumn="media_set_id" DataSetColumn="media_set_id" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="databases" msprop:Generator_TableClassName="databasesDataTable" msprop:Generator_TableVarName="tabledatabases" msprop:Generator_TablePropName="databases" msprop:Generator_RowDeletingName="databasesRowDeleting" msprop:Generator_RowChangingName="databasesRowChanging" msprop:Generator_RowEvHandlerName="databasesRowChangeEventHandler" msprop:Generator_RowDeletedName="databasesRowDeleted" msprop:Generator_UserTableName="databases" msprop:Generator_RowChangedName="databasesRowChanged" msprop:Generator_RowEvArgName="databasesRowChangeEvent" msprop:Generator_RowClassName="databasesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_UserColumnName="name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="128" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="database_id" msprop:Generator_ColumnVarNameInTable="columndatabase_id" msprop:Generator_ColumnPropNameInRow="database_id" msprop:Generator_ColumnPropNameInTable="database_idColumn" msprop:Generator_UserColumnName="database_id" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="backup_devices" msprop:Generator_TableClassName="backup_devicesDataTable" msprop:Generator_TableVarName="tablebackup_devices" msprop:Generator_TablePropName="backup_devices" msprop:Generator_RowDeletingName="backup_devicesRowDeleting" msprop:Generator_RowChangingName="backup_devicesRowChanging" msprop:Generator_RowEvHandlerName="backup_devicesRowChangeEventHandler" msprop:Generator_RowDeletedName="backup_devicesRowDeleted" msprop:Generator_UserTableName="backup_devices" msprop:Generator_RowChangedName="backup_devicesRowChanged" msprop:Generator_RowEvArgName="backup_devicesRowChangeEvent" msprop:Generator_RowClassName="backup_devicesRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="name" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_UserColumnName="name">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="128" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="SP_STT_BACKUP" msprop:Generator_TableClassName="SP_STT_BACKUPDataTable" msprop:Generator_TableVarName="tableSP_STT_BACKUP" msprop:Generator_TablePropName="SP_STT_BACKUP" msprop:Generator_RowDeletingName="SP_STT_BACKUPRowDeleting" msprop:Generator_RowChangingName="SP_STT_BACKUPRowChanging" msprop:Generator_RowEvHandlerName="SP_STT_BACKUPRowChangeEventHandler" msprop:Generator_RowDeletedName="SP_STT_BACKUPRowDeleted" msprop:Generator_UserTableName="SP_STT_BACKUP" msprop:Generator_RowChangedName="SP_STT_BACKUPRowChanged" msprop:Generator_RowEvArgName="SP_STT_BACKUPRowChangeEvent" msprop:Generator_RowClassName="SP_STT_BACKUPRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="position" msprop:Generator_ColumnVarNameInTable="columnposition" msprop:Generator_ColumnPropNameInRow="position" msprop:Generator_ColumnPropNameInTable="positionColumn" msprop:Generator_UserColumnName="position" type="xs:int" minOccurs="0" />
+              <xs:element name="name" msprop:Generator_ColumnVarNameInTable="columnname" msprop:Generator_ColumnPropNameInRow="name" msprop:Generator_ColumnPropNameInTable="nameColumn" msprop:Generator_UserColumnName="name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="128" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="backup_start_date" msprop:Generator_ColumnVarNameInTable="columnbackup_start_date" msprop:Generator_ColumnPropNameInRow="backup_start_date" msprop:Generator_ColumnPropNameInTable="backup_start_dateColumn" msprop:Generator_UserColumnName="backup_start_date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="user_name" msprop:Generator_ColumnVarNameInTable="columnuser_name" msprop:Generator_ColumnPropNameInRow="user_name" msprop:Generator_ColumnPropNameInTable="user_nameColumn" msprop:Generator_UserColumnName="user_name" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="128" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="backup_set_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnbackup_set_id" msprop:Generator_ColumnPropNameInRow="backup_set_id" msprop:Generator_ColumnPropNameInTable="backup_set_idColumn" msprop:Generator_UserColumnName="backup_set_id" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="keys" msprop:Generator_TableClassName="keysDataTable" msprop:Generator_TableVarName="tablekeys" msprop:Generator_TablePropName="keys" msprop:Generator_RowDeletingName="keysRowDeleting" msprop:Generator_RowChangingName="keysRowChanging" msprop:Generator_RowEvHandlerName="keysRowChangeEventHandler" msprop:Generator_RowDeletedName="keysRowDeleted" msprop:Generator_UserTableName="keys" msprop:Generator_RowChangedName="keysRowChanged" msprop:Generator_RowEvArgName="keysRowChangeEvent" msprop:Generator_RowClassName="keysRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="restore_history_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnrestore_history_id" msprop:Generator_ColumnPropNameInRow="restore_history_id" msprop:Generator_ColumnPropNameInTable="restore_history_idColumn" msprop:Generator_UserColumnName="restore_history_id" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="backupset" msprop:Generator_TableClassName="backupsetDataTable" msprop:Generator_TableVarName="tablebackupset" msprop:Generator_TablePropName="backupset" msprop:Generator_RowDeletingName="backupsetRowDeleting" msprop:Generator_RowChangingName="backupsetRowChanging" msprop:Generator_RowEvHandlerName="backupsetRowChangeEventHandler" msprop:Generator_RowDeletedName="backupsetRowDeleted" msprop:Generator_UserTableName="backupset" msprop:Generator_RowChangedName="backupsetRowChanged" msprop:Generator_RowEvArgName="backupsetRowChangeEvent" msprop:Generator_RowClassName="backupsetRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="backup_set_id" msdata:ReadOnly="true" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="-1" msdata:AutoIncrementStep="-1" msprop:Generator_ColumnVarNameInTable="columnbackup_set_id" msprop:Generator_ColumnPropNameInRow="backup_set_id" msprop:Generator_ColumnPropNameInTable="backup_set_idColumn" msprop:Generator_UserColumnName="backup_set_id" type="xs:int" />
+              <xs:element name="media_set_id" msprop:Generator_ColumnVarNameInTable="columnmedia_set_id" msprop:Generator_ColumnPropNameInRow="media_set_id" msprop:Generator_ColumnPropNameInTable="media_set_idColumn" msprop:Generator_UserColumnName="media_set_id" type="xs:int" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+    <xs:unique name="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:databases" />
+      <xs:field xpath="mstns:database_id" />
+    </xs:unique>
+    <xs:unique name="SP_STT_BACKUP_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:SP_STT_BACKUP" />
+      <xs:field xpath="mstns:backup_set_id" />
+    </xs:unique>
+    <xs:unique name="keys_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:keys" />
+      <xs:field xpath="mstns:restore_history_id" />
+    </xs:unique>
+    <xs:unique name="backupset_Constraint1" msdata:ConstraintName="Constraint1" msdata:PrimaryKey="true">
+      <xs:selector xpath=".//mstns:backupset" />
+      <xs:field xpath="mstns:backup_set_id" />
+    </xs:unique>
+  </xs:element>
+</xs:schema>
