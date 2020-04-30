@@ -3,6 +3,7 @@ using DevExpress.XtraEditors;
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -71,6 +72,14 @@ namespace BK_Restore
 			return string.Format("DEVICE_{0}", databaseName);
 		}
 
+		public static void CreateFolderDevice()
+		{
+			if (!System.IO.File.Exists(DefaultPath))
+			{
+				System.IO.Directory.CreateDirectory(DefaultPath);
+			}
+		}
+
 		public static void ShowError(Exception e, bool isShowMessageBox = true)
 		{
 			//if (e is SqlException)
@@ -94,6 +103,7 @@ namespace BK_Restore
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
+			CreateFolderDevice();
 			Application.Run(new FormLogin());
 		}
 	}
