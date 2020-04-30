@@ -76,12 +76,19 @@ namespace BK_Restore
 				{
 					EnableBarItems(true);
 					btnCreateDevice.Enabled = false;
-					if (bdsBackup.Count == 0) btnRestore.Enabled = false;
+					btnCreateDeviceM.Visible = false;
+					btnBackupM.Visible = true;
+					if (bdsBackup.Count == 0)
+					{
+						btnRestore.Enabled = false;
+					}
 				}
 				else
 				{
 					EnableBarItems(false);
 					btnCreateDevice.Enabled = true;
+					btnCreateDeviceM.Visible = true;
+					btnBackupM.Visible = false;
 				}
 			}
 			catch (Exception ex)
@@ -107,7 +114,7 @@ namespace BK_Restore
 			}
 			else
 				queryString = string.Format(CONS.QUERYSTRING.BACKUP, dbName, deviceName);
-			string dienGiai = GetMessageBoxText("Tạo backup", "Nhập diễn giải");
+			string dienGiai = GetMessageBoxText("TẠO BACKUP", "Nhập diễn giải");
 			if(dienGiai == null)
 			{
 				return;
@@ -128,12 +135,13 @@ namespace BK_Restore
 					MessageBoxButtons.OK, MessageBoxIcon.Information);
 				this.taBackup.Fill(this.dataSet.SP_STT_BACKUP, dbName);
 				//txtBackupPosition.Text = ((DataRowView)bdsBackup[0])["position"].ToString();
+				btnRestore.Enabled = true;
 			}
 		}
 
 		private string GetMessageBoxText(string caption, string label)
 		{
-			XtraInputBoxArgs args = new XtraInputBoxArgs(this, caption, label, string.Empty);
+			XtraInputBoxArgs args = new XtraInputBoxArgs(this, label, caption, string.Empty);
 			var result = XtraInputBox.Show(args);
 			return (string)result;
 		}
@@ -378,11 +386,6 @@ namespace BK_Restore
 
 		private void btnDeleteBackup_Click(object sender, EventArgs e)
 		{
-			if (bdsBackup.Count == 0)
-			{
-
-				return;
-			}
 			int backupSetId = int.Parse(((DataRowView)bdsBackup.Current)["backup_set_id"].ToString());
 			int resultExec = DeleteBackup(backupSetId);
 
@@ -397,17 +400,28 @@ namespace BK_Restore
 					MessageBoxButtons.OK, MessageBoxIcon.Error);
 			}
 			taBackup.Fill(dataSet.SP_STT_BACKUP, txtDatabaseName.Text);
+			if(bdsBackup.Count == 0)
+			{
+				btnRestore.Enabled = false;
+			}
 		}
 
 		private int DeleteBackup(int backupSetId)
 		{
+			LOG.DEBUG("Delete backup", "backup_set_id", backupSetId);
 			taKeys.Fill(dataSet.keys, backupSetId);
 			string query = string.Format(CONS.QUERYSTRING.DELETE_BACKUP, backupSetId);
 
-			if (bdsKeys.Count > 0)
+			int restoreCount = bdsKeys.Count;
+			if (restoreCount > 0)
 			{
-				string restore_history_id = ((DataRowView)bdsKeys.Current)["restore_history_id"].ToString();
-				query = string.Format(CONS.QUERYSTRING.DELETE_RESTORE_HISTORY, restore_history_id) + query;
+				string queryDeleteRestoreHistory = "";
+				for (int index = 0; index < restoreCount; index++)
+				{
+					string restore_history_id = ((DataRowView)bdsKeys[index])["restore_history_id"].ToString();
+					queryDeleteRestoreHistory += string.Format(CONS.QUERYSTRING.DELETE_RESTORE_HISTORY, restore_history_id);
+				}
+				query = queryDeleteRestoreHistory + query;
 			}
 
 			return Program.ExecSqlNonQuery(query, Program.ConnectionString);
@@ -425,8 +439,36 @@ namespace BK_Restore
 
 		private void cmsBackup_Opening(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			if (bdsBackup.Count == 0) btnDeleteBackup.Enabled = false;
-			else btnDeleteBackup.Enabled = true;
+			if (bdsBackup.Count == 0)
+			{
+				btnDeleteBackup.Enabled = false;
+				btnRestoreM.Enabled = false;
+			}
+			else
+			{
+				btnDeleteBackup.Enabled = true;
+				btnRestoreM.Enabled = true;
+			}
+		}
+
+		private void btnRestoreM_Click(object sender, EventArgs e)
+		{
+			btnRestore.PerformClick();
+		}
+
+		private void btnCreateDeviceM_Click(object sender, EventArgs e)
+		{
+			btnCreateDevice.PerformClick();
+		}
+
+		private void btnBackupM_Click(object sender, EventArgs e)
+		{
+			btnBackup.PerformClick();
+		}
+
+		private void cmsDB_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			
 		}
 	}
 }

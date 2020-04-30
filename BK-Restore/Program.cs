@@ -83,7 +83,7 @@ namespace BK_Restore
 			string targetSite = "Method: " + e.TargetSite + "\n";
 			if(isShowMessageBox)
 				XtraMessageBox.Show(source + targetSite + message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			Console.WriteLine(e.StackTrace);
+			Console.WriteLine(source + targetSite + message + "\n" + e.StackTrace);
 		}
 
 		/// <summary>

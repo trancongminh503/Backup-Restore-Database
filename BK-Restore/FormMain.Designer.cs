@@ -47,12 +47,14 @@
 			this.bdsDatabases = new System.Windows.Forms.BindingSource(this.components);
 			this.taDatabases = new BK_Restore.DataSet1TableAdapters.databasesTableAdapter();
 			this.gcDatabases = new DevExpress.XtraGrid.GridControl();
-			this.cmsBackup = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.btnDeleteBackup = new System.Windows.Forms.ToolStripMenuItem();
-			this.btnReload2 = new System.Windows.Forms.ToolStripMenuItem();
+			this.cmsDB = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.btnReload3 = new System.Windows.Forms.ToolStripMenuItem();
 			this.gvDatabases = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.colname = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.coldatabase_id = new DevExpress.XtraGrid.Columns.GridColumn();
+			this.cmsBackup = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.btnDeleteBackup = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnReload2 = new System.Windows.Forms.ToolStripMenuItem();
 			this.bdsDevices = new System.Windows.Forms.BindingSource(this.components);
 			this.taDevices = new BK_Restore.DataSet1TableAdapters.backup_devicesTableAdapter();
 			this.bdsBackup = new System.Windows.Forms.BindingSource(this.components);
@@ -78,14 +80,16 @@
 			this.taKeys = new BK_Restore.DataSet1TableAdapters.keysTableAdapter();
 			this.bdsBackupSet = new System.Windows.Forms.BindingSource(this.components);
 			this.taBackupSet = new BK_Restore.DataSet1TableAdapters.backupsetTableAdapter();
-			this.cmsDB = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.btnReload3 = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnRestoreM = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnCreateDeviceM = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnBackupM = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataSet)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.bdsDatabases)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gcDatabases)).BeginInit();
-			this.cmsBackup.SuspendLayout();
+			this.cmsDB.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.gvDatabases)).BeginInit();
+			this.cmsBackup.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.bdsDevices)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.bdsBackup)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.gcBackup)).BeginInit();
@@ -103,7 +107,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.dtpDateRestore.Properties)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.bdsKeys)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.bdsBackupSet)).BeginInit();
-			this.cmsDB.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// barManager
@@ -281,30 +284,23 @@
 			this.gcDatabases.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gvDatabases});
 			// 
-			// cmsBackup
+			// cmsDB
 			// 
-			this.cmsBackup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnDeleteBackup,
-            this.btnReload2});
-			this.cmsBackup.Name = "cmsBackup";
-			this.cmsBackup.Size = new System.Drawing.Size(159, 48);
-			this.cmsBackup.Opening += new System.ComponentModel.CancelEventHandler(this.cmsBackup_Opening);
+			this.cmsDB.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnReload3,
+            this.btnCreateDeviceM,
+            this.btnBackupM});
+			this.cmsDB.Name = "cmsDB";
+			this.cmsDB.Size = new System.Drawing.Size(181, 92);
+			this.cmsDB.Opening += new System.ComponentModel.CancelEventHandler(this.cmsDB_Opening);
 			// 
-			// btnDeleteBackup
+			// btnReload3
 			// 
-			this.btnDeleteBackup.Image = global::BK_Restore.Properties.Resources.trash;
-			this.btnDeleteBackup.Name = "btnDeleteBackup";
-			this.btnDeleteBackup.Size = new System.Drawing.Size(158, 22);
-			this.btnDeleteBackup.Text = "Xóa bản sao lưu";
-			this.btnDeleteBackup.Click += new System.EventHandler(this.btnDeleteBackup_Click);
-			// 
-			// btnReload2
-			// 
-			this.btnReload2.Image = global::BK_Restore.Properties.Resources.refresh;
-			this.btnReload2.Name = "btnReload2";
-			this.btnReload2.Size = new System.Drawing.Size(158, 22);
-			this.btnReload2.Text = "Làm mới";
-			this.btnReload2.Click += new System.EventHandler(this.btnReload_ItemClick);
+			this.btnReload3.Image = global::BK_Restore.Properties.Resources.refresh;
+			this.btnReload3.Name = "btnReload3";
+			this.btnReload3.Size = new System.Drawing.Size(180, 22);
+			this.btnReload3.Text = "Làm mới";
+			this.btnReload3.Click += new System.EventHandler(this.btnReload_ItemClick);
 			// 
 			// gvDatabases
 			// 
@@ -340,6 +336,32 @@
 			// 
 			this.coldatabase_id.FieldName = "database_id";
 			this.coldatabase_id.Name = "coldatabase_id";
+			// 
+			// cmsBackup
+			// 
+			this.cmsBackup.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.btnDeleteBackup,
+            this.btnReload2,
+            this.btnRestoreM});
+			this.cmsBackup.Name = "cmsBackup";
+			this.cmsBackup.Size = new System.Drawing.Size(223, 70);
+			this.cmsBackup.Opening += new System.ComponentModel.CancelEventHandler(this.cmsBackup_Opening);
+			// 
+			// btnDeleteBackup
+			// 
+			this.btnDeleteBackup.Image = global::BK_Restore.Properties.Resources.trash;
+			this.btnDeleteBackup.Name = "btnDeleteBackup";
+			this.btnDeleteBackup.Size = new System.Drawing.Size(222, 22);
+			this.btnDeleteBackup.Text = "Xóa bản sao lưu";
+			this.btnDeleteBackup.Click += new System.EventHandler(this.btnDeleteBackup_Click);
+			// 
+			// btnReload2
+			// 
+			this.btnReload2.Image = global::BK_Restore.Properties.Resources.refresh;
+			this.btnReload2.Name = "btnReload2";
+			this.btnReload2.Size = new System.Drawing.Size(222, 22);
+			this.btnReload2.Text = "Làm mới";
+			this.btnReload2.Click += new System.EventHandler(this.btnReload_ItemClick);
 			// 
 			// bdsDevices
 			// 
@@ -609,20 +631,29 @@
 			// 
 			this.taBackupSet.ClearBeforeFill = true;
 			// 
-			// cmsDB
+			// btnRestoreM
 			// 
-			this.cmsDB.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.btnReload3});
-			this.cmsDB.Name = "cmsDB";
-			this.cmsDB.Size = new System.Drawing.Size(122, 26);
+			this.btnRestoreM.Image = global::BK_Restore.Properties.Resources.hdd;
+			this.btnRestoreM.Name = "btnRestoreM";
+			this.btnRestoreM.Size = new System.Drawing.Size(222, 22);
+			this.btnRestoreM.Text = "Phục hồi về bản sao lưu này";
+			this.btnRestoreM.Click += new System.EventHandler(this.btnRestoreM_Click);
 			// 
-			// btnReload3
+			// btnCreateDeviceM
 			// 
-			this.btnReload3.Image = global::BK_Restore.Properties.Resources.refresh;
-			this.btnReload3.Name = "btnReload3";
-			this.btnReload3.Size = new System.Drawing.Size(121, 22);
-			this.btnReload3.Text = "Làm mới";
-			this.btnReload3.Click += new System.EventHandler(this.btnReload_ItemClick);
+			this.btnCreateDeviceM.Image = global::BK_Restore.Properties.Resources.save;
+			this.btnCreateDeviceM.Name = "btnCreateDeviceM";
+			this.btnCreateDeviceM.Size = new System.Drawing.Size(180, 22);
+			this.btnCreateDeviceM.Text = "Tạo Device";
+			this.btnCreateDeviceM.Click += new System.EventHandler(this.btnCreateDeviceM_Click);
+			// 
+			// btnBackupM
+			// 
+			this.btnBackupM.Image = global::BK_Restore.Properties.Resources.backup3;
+			this.btnBackupM.Name = "btnBackupM";
+			this.btnBackupM.Size = new System.Drawing.Size(180, 22);
+			this.btnBackupM.Text = "Sao lưu";
+			this.btnBackupM.Click += new System.EventHandler(this.btnBackupM_Click);
 			// 
 			// FormMain
 			// 
@@ -650,8 +681,9 @@
 			((System.ComponentModel.ISupportInitialize)(this.dataSet)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.bdsDatabases)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gcDatabases)).EndInit();
-			this.cmsBackup.ResumeLayout(false);
+			this.cmsDB.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.gvDatabases)).EndInit();
+			this.cmsBackup.ResumeLayout(false);
 			((System.ComponentModel.ISupportInitialize)(this.bdsDevices)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.bdsBackup)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.gcBackup)).EndInit();
@@ -671,7 +703,6 @@
 			((System.ComponentModel.ISupportInitialize)(this.dtpDateRestore.Properties)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.bdsKeys)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.bdsBackupSet)).EndInit();
-			this.cmsDB.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -729,5 +760,8 @@
 		private System.Windows.Forms.ToolStripMenuItem btnReload2;
 		private System.Windows.Forms.ContextMenuStrip cmsDB;
 		private System.Windows.Forms.ToolStripMenuItem btnReload3;
+		private System.Windows.Forms.ToolStripMenuItem btnRestoreM;
+		private System.Windows.Forms.ToolStripMenuItem btnCreateDeviceM;
+		private System.Windows.Forms.ToolStripMenuItem btnBackupM;
 	}
 }
