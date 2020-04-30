@@ -17,10 +17,10 @@
 			/// {2} Position backup
 			/// </summary>
 			public static string RESTORE =
-				"ALTER DATABASE {0} SET SINGLE_USER WITH ROLLBACK IMMEDIATE\n" +
+				"ALTER DATABASE [{0}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE\n" +
 				"USE tempdb\n" +
-				"RESTORE DATABASE {0} FROM {1} WITH FILE = {2}, REPLACE\n" +
-				"ALTER DATABASE {0} SET MULTI_USER";
+				"RESTORE DATABASE [{0}] FROM [{1}] WITH FILE = {2}, REPLACE\n" +
+				"ALTER DATABASE [{0}] SET MULTI_USER";
 
 			/// <summary>
 			/// {0} database name
@@ -29,10 +29,10 @@
 			/// {3} position restore
 			/// </summary>
 			public static string RESTORE_WITH_TIME_1 =
-				"ALTER DATABASE {0} SET SINGLE_USER WITH ROLLBACK IMMEDIATE\n" +
-				"BACKUP LOG {0} TO DISK = '{1}' WITH INIT\n" +
+				"ALTER DATABASE [{0}] SET SINGLE_USER WITH ROLLBACK IMMEDIATE\n" +
+				"BACKUP LOG [{0}] TO DISK = '{1}' WITH INIT\n" +
 				"USE MASTER\n" +
-				"RESTORE DATABASE {0} FROM {2} WITH FILE = {3}, REPLACE, NORECOVERY\n";
+				"RESTORE DATABASE [{0}] FROM [{2}] WITH FILE = {3}, REPLACE, NORECOVERY\n";
 
 			/// <summary>
 			/// {0} database name
@@ -40,7 +40,7 @@
 			/// {2} restore time
 			/// </summary>
 			public static string RESTORE_WITH_TIME_2 =
-				"RESTORE DATABASE {0} FROM DISK = '{1}' WITH STOPAT = '{2}'";
+				"RESTORE DATABASE [{0}] FROM DISK = '{1}' WITH STOPAT = '{2}'";
 
 			/// <summary>
 			/// {0} backup_set_id

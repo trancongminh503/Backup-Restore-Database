@@ -108,9 +108,13 @@ namespace BK_Restore
 			else
 				queryString = string.Format(CONS.QUERYSTRING.BACKUP, dbName, deviceName);
 			string dienGiai = GetMessageBoxText("Tạo backup", "Nhập diễn giải");
-			if (string.IsNullOrWhiteSpace(dienGiai) == false)
+			if(dienGiai == null)
 			{
-				queryString += $" WITH NAME = '{dienGiai}'";
+				return;
+			}
+			if (dienGiai != string.Empty)
+			{
+				queryString += $" WITH NAME = N'{dienGiai}'";
 			}
 
 			int resultExec = Program.ExecSqlNonQuery(queryString, Program.ConnectionString);
@@ -129,8 +133,9 @@ namespace BK_Restore
 
 		private string GetMessageBoxText(string caption, string label)
 		{
-			var result = XtraInputBox.Show(this, label, caption, "");
-			return result;
+			XtraInputBoxArgs args = new XtraInputBoxArgs(this, caption, label, string.Empty);
+			var result = XtraInputBox.Show(args);
+			return (string)result;
 		}
 
 		private void ClearBackupInBackupSet()
@@ -233,8 +238,8 @@ namespace BK_Restore
 			#region ERROR_RESTORE_DEVICE
 			if (resultExec != 0)
 			{
-				queryString = $"RESTORE DATABASE {dbName} FROM {deviceName} WITH FILE = {position}\n" +
-									$"ALTER DATABASE {dbName} SET MULTI_USER";
+				queryString = $"RESTORE DATABASE [{dbName}] FROM [{deviceName}] WITH FILE = {position}\n" +
+									$"ALTER DATABASE [{dbName}] SET MULTI_USER";
 				await Task.Run(() =>
 				{
 					resultExec = Program.ExecSqlNonQuery(queryString, Program.ConnectionString);
@@ -252,8 +257,8 @@ namespace BK_Restore
 			#region ERROR_RESTORE_LOG
 			if (resultExec != 0)
 			{
-				queryString = $"RESTORE DATABASE {dbName} FROM {deviceName} WITH FILE = {position}\n" +
-									$"ALTER DATABASE {dbName} SET MULTI_USER";
+				queryString = $"RESTORE DATABASE [{dbName}] FROM [{deviceName}] WITH FILE = {position}\n" +
+									$"ALTER DATABASE [{dbName}] SET MULTI_USER";
 				await Task.Run(() =>
 				{
 					resultExec = Program.ExecSqlNonQuery(queryString, Program.ConnectionString);
@@ -262,7 +267,7 @@ namespace BK_Restore
 			}
 			#endregion
 
-			queryString = $"ALTER DATABASE {dbName} SET MULTI_USER";
+			queryString = $"ALTER DATABASE [{dbName}] SET MULTI_USER";
 			await Task.Run(() =>
 			{
 				resultExec = Program.ExecSqlNonQuery(queryString, Program.ConnectionString);
