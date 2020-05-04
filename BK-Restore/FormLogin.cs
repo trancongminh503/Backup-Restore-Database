@@ -55,6 +55,7 @@ namespace BK_Restore
 
 		private void btnLogin_Click(object sender, EventArgs e)
 		{
+			Program.ServerName = cboServers.Text;
 			Program.UserName = txtLogin.Text;
 			Program.Password = txtPassword.Text;
 
