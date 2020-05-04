@@ -387,6 +387,11 @@ namespace BK_Restore
 		private void btnDeleteBackup_Click(object sender, EventArgs e)
 		{
 			int backupSetId = int.Parse(((DataRowView)bdsBackup.Current)["backup_set_id"].ToString());
+
+			if (XtraMessageBox.Show("Bạn chắc chắn muốn xóa file backup này?", "QUESTION",
+				MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+				return;
+
 			int resultExec = DeleteBackup(backupSetId);
 
 			if (resultExec == 0)
