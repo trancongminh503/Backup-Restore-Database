@@ -220,7 +220,6 @@ namespace BK_Restore
 			await Task.Run(() =>
 			{
 				resultExec = Program.ExecSqlNonQuery(queryString, Program.ConnectionString);
-				Thread.Sleep(2000);
 			});
 			return resultExec;
 		}
@@ -241,7 +240,6 @@ namespace BK_Restore
 			await Task.Run(() =>
 			{
 				resultExec = Program.ExecSqlNonQuery(queryString, Program.ConnectionString);
-				Thread.Sleep(500);
 			});
 			#region ERROR_RESTORE_DEVICE
 			if (resultExec != 0)
@@ -260,7 +258,6 @@ namespace BK_Restore
 			await Task.Run(() =>
 			{
 				resultExec = Program.ExecSqlNonQuery(queryString, Program.ConnectionString);
-				Thread.Sleep(500);
 			});
 			#region ERROR_RESTORE_LOG
 			if (resultExec != 0)
@@ -279,7 +276,6 @@ namespace BK_Restore
 			await Task.Run(() =>
 			{
 				resultExec = Program.ExecSqlNonQuery(queryString, Program.ConnectionString);
-				Thread.Sleep(500);
 			});
 
 			return 0;
