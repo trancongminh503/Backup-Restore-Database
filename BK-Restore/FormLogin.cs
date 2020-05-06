@@ -16,7 +16,7 @@ namespace BK_Restore
 		{
 			InitializeComponent();
 			txtPassword.Properties.PasswordChar = '•';
-			cboServers.SelectedIndex = 0;
+			//cboServers.SelectedIndex = 0;
 		}
 
 		public async Task GetListServer()

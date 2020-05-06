@@ -250,7 +250,7 @@ namespace BK_Restore
 									$"ALTER DATABASE [{dbName}] SET MULTI_USER";
 				await Task.Run(() =>
 				{
-					resultExec = Program.ExecSqlNonQuery(queryString, Program.ConnectionString);
+					Program.ExecSqlNonQuery(queryString, Program.ConnectionString);
 				});
 				return resultExec;
 			}
@@ -269,7 +269,7 @@ namespace BK_Restore
 									$"ALTER DATABASE [{dbName}] SET MULTI_USER";
 				await Task.Run(() =>
 				{
-					resultExec = Program.ExecSqlNonQuery(queryString, Program.ConnectionString);
+					Program.ExecSqlNonQuery(queryString, Program.ConnectionString);
 				});
 				return resultExec;
 			}

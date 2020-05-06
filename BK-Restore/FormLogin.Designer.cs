@@ -51,8 +51,6 @@
 			this.cboServers.BackColor = System.Drawing.Color.White;
 			this.cboServers.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
 			this.cboServers.FormattingEnabled = true;
-			this.cboServers.Items.AddRange(new object[] {
-            "MINHTRAN"});
 			this.cboServers.Location = new System.Drawing.Point(178, 30);
 			this.cboServers.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
 			this.cboServers.Name = "cboServers";
@@ -62,7 +60,7 @@
 			// 
 			// txtPassword
 			// 
-			this.txtPassword.EditValue = "123456";
+			this.txtPassword.EditValue = "";
 			this.txtPassword.Location = new System.Drawing.Point(178, 122);
 			this.txtPassword.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
 			this.txtPassword.Name = "txtPassword";
@@ -74,7 +72,7 @@
 			// 
 			// txtLogin
 			// 
-			this.txtLogin.EditValue = "sa";
+			this.txtLogin.EditValue = "";
 			this.txtLogin.Location = new System.Drawing.Point(178, 75);
 			this.txtLogin.Margin = new System.Windows.Forms.Padding(2, 4, 2, 4);
 			this.txtLogin.Name = "txtLogin";

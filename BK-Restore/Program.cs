@@ -1,10 +1,7 @@
-﻿using DevExpress.Utils.Extensions;
-using DevExpress.XtraEditors;
+﻿using DevExpress.XtraEditors;
 using System;
 using System.Data;
 using System.Data.SqlClient;
-using System.Runtime.CompilerServices;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace BK_Restore
@@ -90,7 +87,7 @@ namespace BK_Restore
 			string message = e.Message + "\n";
 			string source = "Source: " + e.Source + "\n";
 			string targetSite = "Method: " + e.TargetSite + "\n";
-			if(isShowMessageBox)
+			if (isShowMessageBox)
 				XtraMessageBox.Show(source + targetSite + message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
 			Console.WriteLine(source + targetSite + message + "\n" + e.StackTrace);
 		}
