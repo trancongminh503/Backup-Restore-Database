@@ -49,12 +49,15 @@
 			this.gcDatabases = new DevExpress.XtraGrid.GridControl();
 			this.cmsDB = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.btnReload3 = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnCreateDeviceM = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnBackupM = new System.Windows.Forms.ToolStripMenuItem();
 			this.gvDatabases = new DevExpress.XtraGrid.Views.Grid.GridView();
 			this.colname = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.coldatabase_id = new DevExpress.XtraGrid.Columns.GridColumn();
 			this.cmsBackup = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.btnDeleteBackup = new System.Windows.Forms.ToolStripMenuItem();
 			this.btnReload2 = new System.Windows.Forms.ToolStripMenuItem();
+			this.btnRestoreM = new System.Windows.Forms.ToolStripMenuItem();
 			this.bdsDevices = new System.Windows.Forms.BindingSource(this.components);
 			this.taDevices = new BK_Restore.DataSet1TableAdapters.backup_devicesTableAdapter();
 			this.bdsBackup = new System.Windows.Forms.BindingSource(this.components);
@@ -80,9 +83,6 @@
 			this.taKeys = new BK_Restore.DataSet1TableAdapters.keysTableAdapter();
 			this.bdsBackupSet = new System.Windows.Forms.BindingSource(this.components);
 			this.taBackupSet = new BK_Restore.DataSet1TableAdapters.backupsetTableAdapter();
-			this.btnRestoreM = new System.Windows.Forms.ToolStripMenuItem();
-			this.btnCreateDeviceM = new System.Windows.Forms.ToolStripMenuItem();
-			this.btnBackupM = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.barManager)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.dataSet)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.bdsDatabases)).BeginInit();
@@ -291,16 +291,32 @@
             this.btnCreateDeviceM,
             this.btnBackupM});
 			this.cmsDB.Name = "cmsDB";
-			this.cmsDB.Size = new System.Drawing.Size(181, 92);
+			this.cmsDB.Size = new System.Drawing.Size(132, 70);
 			this.cmsDB.Opening += new System.ComponentModel.CancelEventHandler(this.cmsDB_Opening);
 			// 
 			// btnReload3
 			// 
 			this.btnReload3.Image = global::BK_Restore.Properties.Resources.refresh;
 			this.btnReload3.Name = "btnReload3";
-			this.btnReload3.Size = new System.Drawing.Size(180, 22);
+			this.btnReload3.Size = new System.Drawing.Size(131, 22);
 			this.btnReload3.Text = "Làm mới";
 			this.btnReload3.Click += new System.EventHandler(this.btnReload_ItemClick);
+			// 
+			// btnCreateDeviceM
+			// 
+			this.btnCreateDeviceM.Image = global::BK_Restore.Properties.Resources.save;
+			this.btnCreateDeviceM.Name = "btnCreateDeviceM";
+			this.btnCreateDeviceM.Size = new System.Drawing.Size(131, 22);
+			this.btnCreateDeviceM.Text = "Tạo Device";
+			this.btnCreateDeviceM.Click += new System.EventHandler(this.btnCreateDeviceM_Click);
+			// 
+			// btnBackupM
+			// 
+			this.btnBackupM.Image = global::BK_Restore.Properties.Resources.backup3;
+			this.btnBackupM.Name = "btnBackupM";
+			this.btnBackupM.Size = new System.Drawing.Size(131, 22);
+			this.btnBackupM.Text = "Sao lưu";
+			this.btnBackupM.Click += new System.EventHandler(this.btnBackupM_Click);
 			// 
 			// gvDatabases
 			// 
@@ -362,6 +378,14 @@
 			this.btnReload2.Size = new System.Drawing.Size(222, 22);
 			this.btnReload2.Text = "Làm mới";
 			this.btnReload2.Click += new System.EventHandler(this.btnReload_ItemClick);
+			// 
+			// btnRestoreM
+			// 
+			this.btnRestoreM.Image = global::BK_Restore.Properties.Resources.hdd;
+			this.btnRestoreM.Name = "btnRestoreM";
+			this.btnRestoreM.Size = new System.Drawing.Size(222, 22);
+			this.btnRestoreM.Text = "Phục hồi về bản sao lưu này";
+			this.btnRestoreM.Click += new System.EventHandler(this.btnRestoreM_Click);
 			// 
 			// bdsDevices
 			// 
@@ -630,30 +654,6 @@
 			// taBackupSet
 			// 
 			this.taBackupSet.ClearBeforeFill = true;
-			// 
-			// btnRestoreM
-			// 
-			this.btnRestoreM.Image = global::BK_Restore.Properties.Resources.hdd;
-			this.btnRestoreM.Name = "btnRestoreM";
-			this.btnRestoreM.Size = new System.Drawing.Size(222, 22);
-			this.btnRestoreM.Text = "Phục hồi về bản sao lưu này";
-			this.btnRestoreM.Click += new System.EventHandler(this.btnRestoreM_Click);
-			// 
-			// btnCreateDeviceM
-			// 
-			this.btnCreateDeviceM.Image = global::BK_Restore.Properties.Resources.save;
-			this.btnCreateDeviceM.Name = "btnCreateDeviceM";
-			this.btnCreateDeviceM.Size = new System.Drawing.Size(180, 22);
-			this.btnCreateDeviceM.Text = "Tạo Device";
-			this.btnCreateDeviceM.Click += new System.EventHandler(this.btnCreateDeviceM_Click);
-			// 
-			// btnBackupM
-			// 
-			this.btnBackupM.Image = global::BK_Restore.Properties.Resources.backup3;
-			this.btnBackupM.Name = "btnBackupM";
-			this.btnBackupM.Size = new System.Drawing.Size(180, 22);
-			this.btnBackupM.Text = "Sao lưu";
-			this.btnBackupM.Click += new System.EventHandler(this.btnBackupM_Click);
 			// 
 			// FormMain
 			// 

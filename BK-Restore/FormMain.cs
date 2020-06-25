@@ -289,9 +289,9 @@ namespace BK_Restore
 			DateTime thoiDiemStopAt = DateTime.Parse(strThoiDiemStopAt);
 			if ((dtpDateRestore.DateTime.Date < ngayGioBackup.Date) ||
 				(dtpDateRestore.DateTime.Date == ngayGioBackup.Date &&
-				(thoiDiemStopAt.TimeOfDay.Ticks - ngayGioBackup.TimeOfDay.Ticks) < TimeSpan.FromMinutes(3).Ticks))
+				(thoiDiemStopAt.TimeOfDay.Ticks < ngayGioBackup.TimeOfDay.Ticks)/* < TimeSpan.FromMinutes(3).Ticks*/))
 			{
-				XtraMessageBox.Show("Thời điểm muốn phục hồi phải sau thời điểm bản sao lưu đã chọn ít nhất 3 phút",
+				XtraMessageBox.Show("Thời điểm muốn phục hồi phải sau thời điểm bản sao lưu đã",
 					"WARNING", MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return false;
 			}
